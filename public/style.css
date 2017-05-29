@@ -1,0 +1,56 @@
+#index{
+	text-align: center;
+}
+body{
+	margin:0 10% 10% 10%;
+}
+a{
+	text-decoration: none;
+	color:white;
+}
+.navBar{
+	background-color:#004d80;
+	display:flex;
+	padding:1% 5% 1% 5%;
+	font-size:20px;
+}
+
+.userAuth{
+	margin-left:auto;
+}
+.pollList{
+	margin:5%;	
+}
+.polls{
+	padding:2%;
+	margin-bottom:1%;
+	border-style: solid;
+	border-color: black;
+}
+.reglog{
+	display:flex;
+	text-align: center;
+	margin-top:3%;
+}
+.register{
+	flex:1;
+	border-style: solid;
+	border-color: black;
+	padding:2%;
+}
+.login{
+	flex:1;
+	border-style: solid;
+	border-color: black;
+	padding:2%;
+}
+input{
+	padding:1%;
+	margin:1%;
+}
+.buttons{
+	background-color:#004d80;
+	color:white;
+	padding:1.5%;
+	border:none;
+}

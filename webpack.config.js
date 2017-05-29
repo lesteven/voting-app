@@ -2,7 +2,7 @@ var path = require('path');
 
 
 module.exports = {
-  entry: {app:'./src/index.js'},
+  entry: {index:'./src/index.js',regLog:'./src/regLog.js'},
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'public')
@@ -15,9 +15,6 @@ module.exports = {
     proxy:{
     '**':{
       target:'http://localhost:3000',
-      pathRewrite:{
-        '^/about':'/about'
-        },
       changeOrigin:true,
       secure:false
       }
