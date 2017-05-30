@@ -1,13 +1,12 @@
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
-import DefaultNavBar from './components/defaultNavBar';
+import NavBar from './components/navBar';
 import PollList from './components/pollList';
 
 class IndexApp extends Component{
 	render(){
 		return(
 			<div>
-				<DefaultNavBar/>
+				<NavBar/>
 				<PollList />
 			</div>
 		)

@@ -12,34 +12,40 @@ userRouter.route('/register')
 				return res.status(500).json({err:err});	
 			}
 			passport.authenticate('local')(req,res, function(){
-				//req.session.save(function(err){
-				//	if(err){return next(err);}
-					res.redirect('/reglog');
-				//})
+				console.log(req.user.username)
+				res.redirect('/');
 			});
 		});
 });
 
 userRouter.route('/login')
+.post(function(req,res,next){
+	  passport.authenticate('local', function(err, user, info) {
+	    if (err) { return next(err); }
+	    if (!user) { return res.redirect('/reglog'); }
+
+	    req.logIn(user, function(err) {
+	      if (err) { return next(err); }
+	      console.log(user.username)
+	      return res.redirect('/');
+	    });
+	  })(req, res, next);
+})
+
 /*
-.post(function(req,res){
-	User.authenticate()(req.body.username, req.body.password, function (err, user, info) {
-        //if (err) return next(err);
-        if (!user) {
-            res.json({err: info});
-        } 
-        else {
-       	  console.log(req.body.username)
-          res.redirect('/');
-        }
-    });
+.post(passport.authenticate('local',{successRedirect : '/',failureRedirect: '/reglog'}),
+	function(req,res){
+	console.log('hello world')
 });
 */
+userRouter.route('/logout')
 
-.post(passport.authenticate('local',
-	{
-		successRedirect : '/',
-		failureRedirect: '/reglog'
-}));
+.get(function(req,res){
+	console.log(req.user)
+	req.logOut();
+	res.clearCookie('connect.sid');
+	res.redirect('/');
+	console.log(req.user)
+});
 
 module.exports = userRouter;

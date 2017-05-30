@@ -54,3 +54,9 @@ input{
 	padding:1.5%;
 	border:none;
 }
+.homeButton{
+	margin-right:10%;
+}
+.logOut{
+	margin-left:10%;
+}

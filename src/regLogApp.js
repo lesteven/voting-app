@@ -1,11 +1,11 @@
 import React,{Component} from 'react';
-import ReactDOM from 'react-dom';
-import DefaultNavBar from './components/defaultNavBar';
+import NavBar from './components/navBar';
+
 class RegLog extends Component{
 	render(){
 		return(
 			<div>
-				<DefaultNavBar />
+				<NavBar />
 				<div className = 'reglog'>
 				<span className='register'>
 					<h2>Register</h2>
