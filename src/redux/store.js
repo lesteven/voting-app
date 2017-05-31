@@ -1,19 +1,20 @@
 import {createStore, applyMiddleware, combineReducers,compose} from 'redux';
-import loginReducer from './modules/loginModule';
+import user from './modules/loginModule';
+import thunk from 'redux-thunk';
 
 const reducers = combineReducers({
-	loginReducer
+	user
 })
 
-export function configureStore(initialState){
-	const store = createStore(
+export default function configureStore(initialState){
+	return createStore(
 		reducers,
 		initialState,
 		compose(
+			applyMiddleware(thunk),
 			window.devToolsExtension? window.devToolsExtension():f=>f
 		)
 	)
-	return store;
+	
 }
 
-export const store = configureStore();

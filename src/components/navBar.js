@@ -1,26 +1,18 @@
 import React,{Component} from 'react';
+import { connect } from 'react-redux';
+import {fetchUser} from '../redux/modules/loginModule'
 
 class NavBar extends Component{
-	constructor(props){
-		super(props);
-		this.state ={
-			user:{username:''}
-		}
-	}
+
 	componentDidMount(){
-		fetch('/users', { credentials : 'same-origin' })
-		.then(response =>response.json())
-		.then(json =>{
-			this.setState({
-				user:json
-			})
-		})
+		this.props.getUser()
+		
 	}
 	login(){
 		return(
 			<span className = 'userAuth'>
-			<a >{this.state.user.username} </a>
-
+			<a >{this.props.user.username} </a>
+			&nbsp;&nbsp;&nbsp;&nbsp;
 			<a className = 'logOut' href ='/users/logout'>Log Out</a>
 			</span>
 		)
@@ -29,7 +21,7 @@ class NavBar extends Component{
 		return(
 			<div className='navBar'>
 			<a className ='homeButton' href ='/'>Home</a>
-			{this.state.user.username?
+			{this.props.user.username?
 				this.login()
 				: 
 			<a className = 'userAuth' href ='/reglog'>Register/Login</a>
@@ -39,4 +31,16 @@ class NavBar extends Component{
 	}
 }
 
-export default NavBar
+const mapStateToProps = (state) =>{
+	return{
+		user:state.user
+	};
+};
+
+const mapDispatchToProps = (dispatch) =>{
+	return{
+		getUser: (url) => dispatch(fetchUser())
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(NavBar);
