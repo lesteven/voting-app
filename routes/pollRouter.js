@@ -21,7 +21,13 @@ pollRouter.post('/',function(req,res){
 	})
 });
 
-/*
+pollRouter.get('/all',function(req,res){
+	Polls.find({},function(err,poll){
+		if(err) throw err;
+		res.json(poll);
+	})
+})
+
 pollRouter.route('/:pollID')
 .get(function(req,res){
 	//console.log('req.params',req.params.pollID)
@@ -30,13 +36,12 @@ pollRouter.route('/:pollID')
 		if(err){
 			res.json({err:err})
 		}
-		//res.json({hey:'hello there!'})
-		res.sendFile(path.join(__dirname, '../public/pollChart.html'));
-		//express.static(path.join(__dirname, '../public/pollChart.html'));
+		function hello(){
+			return ('hello data!')
+		}
+		res.send(hello())
 	})
 })
-*/
-//.use('/:pollID',express.static(path.join(__dirname, '../public/pollChart.html')));
 
 pollRouter.get('/json/:pollID',function(req,res){
 	//console.log('req.params',req.params.pollID)
@@ -46,9 +51,7 @@ pollRouter.get('/json/:pollID',function(req,res){
 	})
 })
 
-pollRouter.get('/all',function(req,res){
-	res.send('hello all data!')
-})
+
 
 function empty(value){
 	return value !== '';

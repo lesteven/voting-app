@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Polls = () =>{
+const Polls = (props) =>{
 	return(
 		<div className='polls'>
-			Sample Polls
+			{props.title}
 		</div>
 	)
 }

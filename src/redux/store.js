@@ -1,9 +1,11 @@
 import {createStore, applyMiddleware, combineReducers,compose} from 'redux';
-import user from './modules/loginModule';
 import thunk from 'redux-thunk';
+import user from './modules/loginModule';
+import poll from './modules/pollsModule';
 
 const reducers = combineReducers({
-	user
+	user,
+	poll
 })
 
 export default function configureStore(initialState){

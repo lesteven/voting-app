@@ -5,7 +5,7 @@ import {fetchUser} from '../redux/modules/loginModule'
 class NavBar extends Component{
 
 	componentDidMount(){
-		this.props.getUser('/users', { credentials : 'same-origin' })
+		this.props.getUser()
 		
 	}
 	login(){
@@ -43,7 +43,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = (dispatch) =>{
 	return{
-		getUser: (url) => dispatch(fetchUser())
+		getUser: () => dispatch(fetchUser())
 	}
 }
 
