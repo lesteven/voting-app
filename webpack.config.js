@@ -2,7 +2,10 @@ var path = require('path');
 
 
 module.exports = {
-  entry: {index:'./src/index.js',regLog:'./src/regLog.js'},
+  entry: {index:'./src/index.js',
+         regLog:'./src/regLog.js',
+          myPolls:'./src/myPolls.js',
+          pollChart: './src/pollChart.js'},
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'public')

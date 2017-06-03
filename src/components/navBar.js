@@ -5,28 +5,32 @@ import {fetchUser} from '../redux/modules/loginModule'
 class NavBar extends Component{
 
 	componentDidMount(){
-		this.props.getUser()
+		this.props.getUser('/users', { credentials : 'same-origin' })
 		
 	}
 	login(){
 		return(
-			<span className = 'userAuth'>
-			<a >{this.props.user.username} </a>
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<a className = 'logOut' href ='/users/logout'>Log Out</a>
+			<span>
+				<a >{this.props.user.username} </a>
+				<a href ='/mypolls'>My Polls</a>
+				<a href ='/users/logout'>Log Out</a>
+			</span>
+		)
+	}
+	noLogin(){
+		return(
+			<span>
+				<a href ='/reglog'>Register/Login</a>
 			</span>
 		)
 	}
 	render(){
 		return(
-			<div className='navBar'>
-			<a className ='homeButton' href ='/'>Home</a>
-			{this.props.user.username?
-				this.login()
-				: 
-			<a className = 'userAuth' href ='/reglog'>Register/Login</a>
-			}
-			</div>
+			<nav className = 'navBar'>
+				<a href ='/'>Home</a>
+				{this.props.user.username? this.login() : 
+				this.noLogin()}
+			</nav>
 		)
 	}
 }

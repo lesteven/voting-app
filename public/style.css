@@ -1,25 +1,24 @@
-#index{
-	text-align: center;
-}
 body{
 	margin:0 10% 10% 10%;
+	text-align: center;
 }
-a{
+nav a{
 	text-decoration: none;
 	color:white;
+	margin:2%;
+}
+a:hover{
+	color:orange;
 }
 .navBar{
 	background-color:#004d80;
-	display:flex;
-	padding:1% 5% 1% 5%;
 	font-size:20px;
-}
-
-.userAuth{
-	margin-left:auto;
+	padding: 1%;
+	text-align: right;
 }
 .pollList{
 	margin:5%;	
+	text-align:center;
 }
 .polls{
 	padding:2%;
@@ -32,18 +31,13 @@ a{
 	text-align: center;
 	margin-top:3%;
 }
-.register{
+.reglogChild{
 	flex:1;
 	border-style: solid;
 	border-color: black;
 	padding:2%;
 }
-.login{
-	flex:1;
-	border-style: solid;
-	border-color: black;
-	padding:2%;
-}
+
 input{
 	padding:1%;
 	margin:1%;
@@ -53,4 +47,17 @@ input{
 	color:white;
 	padding:1.5%;
 	border:none;
+}
+.createPoll{
+	margin:5%;
+}
+.pollTitle{
+	width:500px;
+}
+textarea{
+	padding:1%;
+	margin:1%;
+	height:200px;
+	width:500px;
+	resize:none;
 }

@@ -1,3 +1,4 @@
+//action
 export function userLogin(user){
 	return{
 		type: 'USER_LOGIN',
@@ -5,7 +6,7 @@ export function userLogin(user){
 	}
 }
 
-
+//async, action creator
 export function fetchUser(){
 	return (dispatch) =>{
 		fetch('/users', { credentials : 'same-origin' })
@@ -14,6 +15,7 @@ export function fetchUser(){
 	}
 }
 
+//reducer
 export const user = (state ={username:''}, action)=>{
 	switch(action.type){
 		case 'USER_LOGIN':

@@ -36,7 +36,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //routers
 var userRouter = require('./routes/userRouter');
-
+var pollRouter = require('./routes/pollRouter');
 
 app.use('/',express.static(__dirname + '/public'));
 
@@ -44,7 +44,11 @@ app.use('/reglog',express.static(__dirname + '/public/reglog.html'));
 
 app.use('/users',userRouter);
 
+app.use('/mypolls',express.static(__dirname + '/public/mypolls.html'));
 
+app.use('/polls', pollRouter);
+
+//app.use('/polls',express.static(__dirname + '/public/pollChart.html'));
 
 
 app.listen(port,function(){
