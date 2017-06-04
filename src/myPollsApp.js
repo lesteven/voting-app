@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import NavBar from './components/navBar';
 import CreatePoll from './components/createPoll';
+import OwnList from './components/myPollsList';
 
 class myPolls extends Component{
 	render(){
@@ -8,6 +9,7 @@ class myPolls extends Component{
 			<div>
 				<NavBar />
 				<CreatePoll />
+				<OwnList />
 			</div>
 		)
 

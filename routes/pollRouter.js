@@ -22,7 +22,18 @@ pollRouter.post('/',function(req,res){
 });
 
 pollRouter.get('/all',function(req,res){
-	Polls.find({},function(err,poll){
+	Polls.find({})
+	.sort('-updatedAt')
+	.exec(function(err,poll){
+		if(err) throw err;
+		res.json(poll);
+	})
+})
+
+pollRouter.get('/personal',function(req,res){
+	Polls.find({user:req.user.username})
+	.sort('-updatedAt')
+	.exec(function(err,poll){
 		if(err) throw err;
 		res.json(poll);
 	})
@@ -39,7 +50,7 @@ pollRouter.route('/:pollID')
 		function hello(){
 			return ('hello data!')
 		}
-		res.send(hello())
+		res.redirect('/')
 	})
 })
 

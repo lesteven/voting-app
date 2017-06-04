@@ -57,7 +57,7 @@ input{
 textarea{
 	padding:1%;
 	margin:1%;
-	height:200px;
+	height:100px;
 	width:500px;
 	resize:none;
 }
