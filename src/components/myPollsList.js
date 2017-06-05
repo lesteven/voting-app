@@ -12,7 +12,10 @@ class OwnList extends Component{
 		if(this.props.myPolls){
 			//console.log(this.props.poll[0].title);
 			displayPoll = this.props.myPolls.map((poll,index)=>{
-				return <Polls title={this.props.myPolls[index].title} key = {index}/>
+				return <Polls 
+				title={this.props.myPolls[index].title} 
+				id={this.props.myPolls[index]._id} 
+				key = {index}/>
 			})
 		}
 		return(

@@ -12,7 +12,11 @@ class PollList extends Component{
 		if(this.props.poll[0]){
 			//console.log(this.props.poll[0].title);
 			displayPoll = this.props.poll.map((poll,index)=>{
-				return <Polls title={this.props.poll[index].title} key = {index}/>
+				return <Polls 
+				title={this.props.poll[index].title}
+				id = {this.props.poll[index]._id}
+				options = {this.props.poll[index].options}
+				key = {index}/>
 			})
 		}
 		return(

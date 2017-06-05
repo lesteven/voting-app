@@ -17,7 +17,7 @@ pollRouter.post('/',function(req,res){
 	Polls.create(pollData,function(err,poll){
 		if(err) throw err;
 		console.log('poll created',poll,poll._id);
-		res.redirect('/polls/' + poll._id)
+		res.redirect('/mypolls')
 	})
 });
 
