@@ -8,11 +8,13 @@ var path = require('path');
 
 pollRouter.post('/',function(req,res){
 	//console.log(req.user.username)
-	var obj = turnToObject(req.body.options)
+	var arrTitles = turnToArray(req.body.options);
+	var genData = generateData(arrTitles)
 	var pollData =({
 		user: req.user.username,
 		title:req.body.title,
-		options:obj
+		options:arrTitles,
+		votes: genData
 	})
 	Polls.create(pollData,function(err,poll){
 		if(err) throw err;
@@ -67,14 +69,16 @@ pollRouter.get('/json/:pollID',function(req,res){
 function empty(value){
 	return value !== '';
 }
-function turnToObject(options){
+function turnToArray(options){
 	var split = options.split(',');
 	var arr = split.filter(empty);
-	var obj ={}
-	for(var i = 0; i < arr.length; i++){
-	  obj[arr[i]] = 0
-	}
-	return obj;
+	return arr;
 }
-
+function generateData(arr){
+  var arrData =[];
+  for(var i = 0;i< arr.length;i++){
+    arrData.push(i)
+  }
+  return arrData;
+}
 module.exports = pollRouter;
