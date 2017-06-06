@@ -77,7 +77,8 @@ function turnToArray(options){
 function generateData(arr){
   var arrData =[];
   for(var i = 0;i< arr.length;i++){
-    arrData.push(i)
+  	var randomNum = Math.ceil(Math.random()*5)
+    arrData.push(randomNum)
   }
   return arrData;
 }

@@ -25,23 +25,23 @@ class Polls extends Component {
 			</div>
 		)
 	}
-	genChart(input){
+	genChart(input,options,votes,title){
 		new Chart(document.getElementById(input), {
 		    type: 'doughnut',
 		    data: {
-		      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+		      labels: options,
 		      datasets: [
 		        {
 		          
 		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-		          data: [2478,5267,734,784,433]
+		          data: votes
 		        }
 		      ]
 		    },
 		    options: {
 		      title: {
 		        display: true,
-		        text: 'Predicted world population (millions) in 2050'
+		        text: title
 			      }
 			    }
 			});
@@ -53,7 +53,10 @@ class Polls extends Component {
 			onClick={this.state.showTable? this.close : this.show}>
 				{this.props.title}
 				{this.chart(this.props.id)}
-				{this.state.showCanvas?this.genChart(this.props.id):null}
+				{this.state.showCanvas?
+					this.genChart(this.props.id,this.props.options,
+						this.props.votes,this.props.title)
+					:null}
 			</div>
 		)
 	}
