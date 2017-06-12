@@ -65,9 +65,10 @@ class Polls extends Component {
 
  	 }
 	render(){
+
 		return(
 			<div className='polls' >
-				{this.deleteButton(this.props.id)}
+				{this.props.user===this.props.owner?this.deleteButton(this.props.id):null}
 				{this.props.title}
 				<span className='buttonGroup'>
 					<button onClick={this.state.style.display===''?this.close:this.show} 

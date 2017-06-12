@@ -13,6 +13,8 @@ class PollList extends Component{
 			//console.log(this.props.poll[0].title);
 			displayPoll = this.props.poll.map((poll,index)=>{
 				return <Polls 
+				user = {this.props.user.username}
+				owner = {this.props.poll[index].user}
 				title={this.props.poll[index].title}
 				id = {this.props.poll[index]._id}
 				votes = {this.props.poll[index].votes}
@@ -31,7 +33,8 @@ class PollList extends Component{
 
 const mapStateToProps =(state)=>{
 	return{
-		poll:state.poll
+		poll:state.poll,
+		user:state.user
 	}
 }
 const mapDispatchToProps =(dispatch)=>{
