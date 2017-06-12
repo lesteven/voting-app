@@ -17,6 +17,7 @@ class PollList extends Component{
 				id = {this.props.poll[index]._id}
 				votes = {this.props.poll[index].votes}
 				options = {this.props.poll[index].options}
+				colors = {this.props.poll[index].colors}
 				key = {index}/>
 			})
 		}

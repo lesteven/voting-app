@@ -17,6 +17,7 @@ class OwnList extends Component{
 				id = {this.props.myPolls[index]._id}
 				votes = {this.props.myPolls[index].votes}
 				options = {this.props.myPolls[index].options}
+				colors = {this.props.myPolls[index].colors}
 				key = {index}/>
 			})
 		}

@@ -9,12 +9,14 @@ var path = require('path');
 pollRouter.post('/',function(req,res){
 	//console.log(req.user.username)
 	var arrTitles = turnToArray(req.body.options);
-	var genData = generateData(arrTitles)
+	var genData = generateData(arrTitles);
+	var colorArray = genColorArray(arrTitles);
 	var pollData =({
 		user: req.user.username,
 		title:req.body.title,
 		options:arrTitles,
-		votes: genData
+		votes: genData,
+		colors: colorArray
 	})
 	Polls.create(pollData,function(err,poll){
 		if(err) throw err;
@@ -41,20 +43,23 @@ pollRouter.get('/personal',function(req,res){
 	})
 })
 
+
+
 pollRouter.route('/:pollID')
-.get(function(req,res){
+.post(function(req,res){
 	//console.log('req.params',req.params.pollID)
 	
 	Polls.findById(req.params.pollID,function(err,poll){
-		if(err){
-			res.json({err:err})
-		}
-		function hello(){
-			return ('hello data!')
-		}
+		if(err) return handleError(err);
+		//console.log(req.body)
+		var index = Number(req.body.vote)
+		poll.votes[index] +=1;
+		poll.markModified('votes');
+		poll.save();
 		res.redirect('/')
 	})
 })
+
 
 pollRouter.get('/json/:pollID',function(req,res){
 	//console.log('req.params',req.params.pollID)
@@ -77,9 +82,26 @@ function turnToArray(options){
 function generateData(arr){
   var arrData =[];
   for(var i = 0;i< arr.length;i++){
-  	var randomNum = Math.ceil(Math.random()*5)
-    arrData.push(randomNum)
+  	//var randomNum = Math.ceil(Math.random()*5)
+    arrData.push(0)
   }
   return arrData;
 }
+function genColor(){
+  var letters = '0123456789abcdef';
+  var color = '#';
+  for(var i = 0; i <6; i++){
+    color += letters[Math.floor(Math.random()*letters.length)]
+  }
+  return color; 
+}
+function genColorArray(arr){
+  var colorArray = [];
+  for(var i = 0; i < arr.length;i++){
+    var color = genColor();
+    colorArray.push(color)
+  }
+  return colorArray;
+}
+
 module.exports = pollRouter;

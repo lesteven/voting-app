@@ -16,46 +16,59 @@ class Polls extends Component {
 		this.setState({showTable:true, style:{display:''},showCanvas:true})
 	}
 	close(){
+		console.log(this.state.style)
 		this.setState({showTable:false,style:{display:'none'}})
 	}
+	voteOptions(arr){
+		let optionsList = arr.map((options,index)=>{
+			return (
+				<div key={index} className= 'vote'>
+				<input type='radio' name='vote' value={index}/>
+				<br/>{arr[index]}<br/>
+				</div>)
+		})
+		return optionsList;
+	}
 	chart(input){
+		var url = '/polls/' + input
 		return(
-			<div>
-			<canvas style={this.state.style} id={input} width="100" height="50"></canvas>
+			<div className='chartDiv' style={this.state.style}>
+			<form className='voteOptions' action={url}  method = 'post'>
+ 				{this.voteOptions(this.props.options)}
+				<input className='buttons' type='submit' value= 'Vote!'/>
+			</form>
+			<canvas id={input} width="100" height="30"></canvas>
 			</div>
 		)
 	}
-	genChart(input,options,votes,title){
+
+	genChart(input,options,votes,colors){
 		new Chart(document.getElementById(input), {
 		    type: 'doughnut',
 		    data: {
 		      labels: options,
 		      datasets: [
 		        {
-		          
-		          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+		          backgroundColor: colors,
 		          data: votes
 		        }
 		      ]
-		    },
-		    options: {
-		      title: {
-		        display: true,
-		        text: title
-			      }
-			    }
+		    }
 			});
 
  	 }
 	render(){
 		return(
-			<div className='polls' 
-			onClick={this.state.showTable? this.close : this.show}>
+			<div className='polls' >
 				{this.props.title}
+				<span className='buttonGroup'>
+					<button onClick={this.state.style.display===''?this.close:this.show} 
+					className='buttons'>Open/Close</button>
+				</span>
 				{this.chart(this.props.id)}
 				{this.state.showCanvas?
 					this.genChart(this.props.id,this.props.options,
-						this.props.votes,this.props.title)
+						this.props.votes,this.props.colors)
 					:null}
 			</div>
 		)

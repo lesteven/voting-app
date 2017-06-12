@@ -21,7 +21,7 @@ a:hover{
 	text-align:center;
 }
 .polls{
-	padding:2%;
+	padding:1%;
 	margin-bottom:1%;
 	border-style: solid;
 	border-color: black;
@@ -60,4 +60,16 @@ textarea{
 	height:100px;
 	width:500px;
 	resize:none;
+}
+.chartDiv{
+	display:flex;
+}
+.buttonGroup{
+	float:right;
+	display:flex;
+}
+
+.vote{
+	color:green;
+	padding: 0 50px 0 50px;
 }
