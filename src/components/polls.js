@@ -24,7 +24,7 @@ class Polls extends Component {
 			return (
 				<div key={index} className= 'vote'>
 				<input type='radio' name='vote' value={index}/>
-				<br/>{arr[index]}<br/>
+				{arr[index]}<br/>
 				</div>)
 		})
 		return optionsList;
@@ -41,7 +41,14 @@ class Polls extends Component {
 			</div>
 		)
 	}
-
+	deleteButton(input){
+		var url = '/polls/' + input + '?_method=DELETE'
+		return(	
+			<form className ='deleteSpan' action={url} method='post'>
+				<input className='delete' type='submit' value='Delete'/>
+			</form>
+		)
+	}
 	genChart(input,options,votes,colors){
 		new Chart(document.getElementById(input), {
 		    type: 'doughnut',
@@ -60,6 +67,7 @@ class Polls extends Component {
 	render(){
 		return(
 			<div className='polls' >
+				{this.deleteButton(this.props.id)}
 				{this.props.title}
 				<span className='buttonGroup'>
 					<button onClick={this.state.style.display===''?this.close:this.show} 

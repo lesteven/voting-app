@@ -66,10 +66,19 @@ textarea{
 }
 .buttonGroup{
 	float:right;
-	display:flex;
 }
-
 .vote{
 	color:green;
-	padding: 0 50px 0 50px;
+	width:150px;
+	padding: 5px;
+	text-align:left;
+}
+.delete{
+	background-color:#330000;
+	color:white;
+	border:none;
+	padding:5%;
+}
+.deleteSpan{
+	float:left;
 }

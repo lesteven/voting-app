@@ -1,5 +1,6 @@
 //server
 var express = require('express');
+var methodOverride = require('method-override')
 var morgan = require('morgan');
 var app = express();
 app.use(morgan('dev'));
@@ -37,6 +38,8 @@ passport.deserializeUser(User.deserializeUser());
 //routers
 var userRouter = require('./routes/userRouter');
 var pollRouter = require('./routes/pollRouter');
+
+app.use(methodOverride('_method'))
 
 app.use('/',express.static(__dirname + '/public'));
 

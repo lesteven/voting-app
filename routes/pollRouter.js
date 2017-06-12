@@ -1,10 +1,12 @@
 var express = require('express');
+
 var mongoose = require('mongoose');
 var pollRouter = express.Router();
 var Polls = require('../models/polls')
 var path = require('path');
 
 //pollRouter.use('/*', express.static(path.join(__dirname, '../public/pollChart.html')));
+
 
 pollRouter.post('/',function(req,res){
 	//console.log(req.user.username)
@@ -43,8 +45,6 @@ pollRouter.get('/personal',function(req,res){
 	})
 })
 
-
-
 pollRouter.route('/:pollID')
 .post(function(req,res){
 	//console.log('req.params',req.params.pollID)
@@ -59,7 +59,13 @@ pollRouter.route('/:pollID')
 		res.redirect('/')
 	})
 })
-
+.delete(function(req,res){
+	//res.send('will delete '+ req.params.pollID)
+	Polls.findByIdAndRemove(req.params.pollID,function(err,resp){
+		if(err) throw err;
+		res.redirect('/');
+	})
+})
 
 pollRouter.get('/json/:pollID',function(req,res){
 	//console.log('req.params',req.params.pollID)
@@ -82,8 +88,8 @@ function turnToArray(options){
 function generateData(arr){
   var arrData =[];
   for(var i = 0;i< arr.length;i++){
-  	//var randomNum = Math.ceil(Math.random()*5)
-    arrData.push(0)
+  	var randomNum = Math.ceil(Math.random()*5)
+    arrData.push(randomNum)
   }
   return arrData;
 }
