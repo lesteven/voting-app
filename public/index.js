@@ -53827,7 +53827,7 @@ var ShareButton = function (_Component) {
 	_createClass(ShareButton, [{
 		key: 'share',
 		value: function share() {
-			window.open("https://twitter.com/intent/tweet?text=" + 'thiswebsite');
+			window.open("https://twitter.com/intent/tweet?text=" + 'https://sleepy-river-96174.herokuapp.com/');
 		}
 	}, {
 		key: 'render',
