@@ -7,10 +7,15 @@ class Polls extends Component {
 		this.state ={
 			showCanvas:false,
 			showTable:false,
-			style:{display:'none'}
+			style:{display:'none'},
+			textArea:''
 		}
 		this.show = this.show.bind(this);
 		this.close = this.close.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+	}
+	handleChange(event){
+		this.setState({textArea:event.target.value})
 	}
 	show(){
 		this.setState({showTable:true, style:{display:''},showCanvas:true})
@@ -29,12 +34,24 @@ class Polls extends Component {
 		})
 		return optionsList;
 	}
+	ownChoice(arr){
+		let index = arr.length;
+		return(
+			<div className='vote'>
+				<input type='radio' name='vote' value={this.state.textArea} />
+				<input className='ownChoice' type ='text' placeholder='Your own choice!' 
+				value={this.state.textArea} onChange={this.handleChange}/>
+				<br/>
+			</div>
+		)
+	}
 	chart(input){
 		var url = '/polls/' + input
 		return(
 			<div className='chartDiv' style={this.state.style}>
 			<form className='voteOptions' action={url}  method = 'post'>
  				{this.voteOptions(this.props.options)}
+ 				{this.ownChoice(this.props.options)}
 				<input className='buttons' type='submit' value= 'Vote!'/>
 			</form>
 			<canvas id={input} width="100" height="30"></canvas>

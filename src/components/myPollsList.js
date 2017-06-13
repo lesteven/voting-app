@@ -13,6 +13,8 @@ class OwnList extends Component{
 			//console.log(this.props.myPolls[0].title);
 			displayPoll = this.props.myPolls.map((poll,index)=>{
 				return <Polls 
+				user = {this.props.user.username}
+				owner = {this.props.myPolls[index].user}
 				title={this.props.myPolls[index].title}
 				id = {this.props.myPolls[index]._id}
 				votes = {this.props.myPolls[index].votes}
@@ -31,7 +33,8 @@ class OwnList extends Component{
 
 const mapStateToProps = (state) =>{
 	return{
-		myPolls:state.myPolls
+		myPolls:state.myPolls,
+		user:state.user
 	}
 }
 const mapDispatchToProps = (dispatch) =>{
