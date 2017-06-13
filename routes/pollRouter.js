@@ -46,14 +46,17 @@ pollRouter.get('/personal',function(req,res){
 })
 
 pollRouter.route('/:pollID')
-.post(function(req,res){
+.post(function(req,res,next){
 	//console.log('req.params',req.params.pollID)
 	console.log(req.body)
 	Polls.findById(req.params.pollID,function(err,poll){
 		if(err) return handleError(err);
 		//console.log(req.body)
 		var index = Number(req.body.vote)
-		if(isNaN(index)){
+		if(!req.body.vote || req.body.vote ===''){
+			next()
+		}
+		else if(isNaN(index)){
 			poll.options.push(req.body.vote);
 			poll.votes.push(1);
 			var color = genColor();
