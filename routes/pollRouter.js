@@ -100,8 +100,8 @@ function turnToArray(options){
 function generateData(arr){
   var arrData =[];
   for(var i = 0;i< arr.length;i++){
-  	var randomNum = Math.ceil(Math.random()*5)
-    arrData.push(randomNum)
+  	//var randomNum = Math.ceil(Math.random()*5)
+    arrData.push(0)
   }
   return arrData;
 }

@@ -47,6 +47,14 @@ app.use('/reglog',express.static(__dirname + '/public/reglog.html'));
 
 app.use('/users',userRouter);
 
+app.use('/mypolls',function(req,res,next){
+	if(!req.user){
+		res.redirect('reglog')
+	}
+	else{
+		next()
+	}
+});
 app.use('/mypolls',express.static(__dirname + '/public/mypolls.html'));
 
 app.use('/polls', pollRouter);

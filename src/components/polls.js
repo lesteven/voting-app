@@ -51,7 +51,7 @@ class Polls extends Component {
 			<div className='chartDiv' style={this.state.style}>
 			<form className='voteOptions' action={url}  method = 'post'>
  				{this.voteOptions(this.props.options)}
- 				{this.ownChoice(this.props.options)}
+ 				{this.props.user? this.ownChoice(this.props.options):null}
 				<input className='buttons' type='submit' value= 'Vote!'/>
 			</form>
 			<canvas id={input} width="100" height="30"></canvas>
