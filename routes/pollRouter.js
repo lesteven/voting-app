@@ -18,7 +18,8 @@ pollRouter.post('/',function(req,res){
 		title:req.body.title,
 		options:arrTitles,
 		votes: genData,
-		colors: colorArray
+		colors: colorArray,
+		voters:[]
 	})
 	Polls.create(pollData,function(err,poll){
 		if(err) throw err;
@@ -57,6 +58,7 @@ pollRouter.route('/:pollID')
 			next()
 		}
 		else if(isNaN(index)){
+			addUser(req,poll)
 			poll.options.push(req.body.vote);
 			poll.votes.push(1);
 			var color = genColor();
@@ -67,6 +69,7 @@ pollRouter.route('/:pollID')
 			poll.save();
 		}
 		else{
+			addUser(req,poll)
 			poll.votes[index] +=1;
 			poll.markModified('votes');
 			poll.save();
@@ -124,5 +127,17 @@ function genColorArray(arr){
   }
   return colorArray;
 }
-
+function addUser(req,poll){
+	if(req.user){
+		poll.voters.push(req.user.username);
+		poll.markModified('voters');
+		console.log('added voter')
+	}
+	else{
+		var ip = req.ip;
+		poll.voters.push(ip);
+		poll.markModified('voters');
+		console.log('no user!',ip)
+	}
+}
 module.exports = pollRouter;
