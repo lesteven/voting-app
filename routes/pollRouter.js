@@ -23,7 +23,7 @@ pollRouter.post('/',function(req,res){
 	})
 	Polls.create(pollData,function(err,poll){
 		if(err) throw err;
-		console.log('poll created',poll,poll._id);
+		//console.log('poll created',poll,poll._id);
 		res.redirect('/mypolls')
 	})
 });
@@ -49,7 +49,7 @@ pollRouter.get('/personal',function(req,res){
 pollRouter.route('/:pollID')
 .post(function(req,res,next){
 	//console.log('req.params',req.params.pollID)
-	console.log(req.body)
+	//console.log(req.body)
 	Polls.findById(req.params.pollID,function(err,poll){
 		if(err) return handleError(err);
 		//console.log(req.body)
@@ -58,21 +58,26 @@ pollRouter.route('/:pollID')
 			next()
 		}
 		else if(isNaN(index)){
-			addUser(req,poll)
-			poll.options.push(req.body.vote);
-			poll.votes.push(1);
-			var color = genColor();
-			poll.colors.push(color);
-			poll.markModified('options')
-			poll.markModified('votes')
-			poll.markModified('colors')
-			poll.save();
+			var status = addUser(req,poll);
+			//console.log(status)
+			if(status){
+				poll.options.push(req.body.vote);
+				poll.votes.push(1);
+				var color = genColor();
+				poll.colors.push(color);
+				poll.markModified('options')
+				poll.markModified('votes')
+				poll.markModified('colors')
+				poll.save();
+			}
 		}
 		else{
-			addUser(req,poll)
-			poll.votes[index] +=1;
-			poll.markModified('votes');
-			poll.save();
+			var status = addUser(req,poll)
+			if(status){
+				poll.votes[index] +=1;
+				poll.markModified('votes');
+				poll.save();
+			}
 		}
 		res.redirect('/')
 	})
@@ -128,16 +133,28 @@ function genColorArray(arr){
   return colorArray;
 }
 function addUser(req,poll){
+	var voters = poll.voters;
 	if(req.user){
-		poll.voters.push(req.user.username);
-		poll.markModified('voters');
-		console.log('added voter')
+		var index = voters.indexOf(req.user.username)
+		//console.log(poll.voters,index,req.user.username)
+		if(index === -1){
+			poll.voters.push(req.user.username);
+			poll.markModified('voters');
+			//console.log('added voter')
+			return true;
+		}
+		else{return false}
 	}
 	else{
 		var ip = req.ip;
-		poll.voters.push(ip);
-		poll.markModified('voters');
-		console.log('no user!',ip)
+		var index = poll.voters.indexOf(ip)
+		if(index === -1){
+			poll.voters.push(ip);
+			poll.markModified('voters');
+			//console.log('no user!',ip)
+			return true;
+		}
+		else{return false}
 	}
 }
 module.exports = pollRouter;

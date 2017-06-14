@@ -21,7 +21,7 @@ class Polls extends Component {
 		this.setState({showTable:true, style:{display:''},showCanvas:true})
 	}
 	close(){
-		console.log(this.state.style)
+		//console.log(this.state.style)
 		this.setState({showTable:false,style:{display:'none'}})
 	}
 	voteOptions(arr){

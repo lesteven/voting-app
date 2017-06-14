@@ -19,7 +19,7 @@ userRouter.post('/register', function(req,res){
 				return res.status(500).json({err:err});	
 			}
 			passport.authenticate('local')(req,res, function(){
-				console.log(req.user.username)
+				//console.log(req.user.username)
 				res.redirect('/');
 			});
 		});
@@ -32,7 +32,7 @@ userRouter.post('/login', function(req,res,next){
 
 	    req.logIn(user, function(err) {
 	      if (err) { return next(err); }
-	      console.log(user.username)
+	      //console.log(user.username)
 	      return res.redirect('/');
 	    });
 	  })(req, res, next);
@@ -40,11 +40,10 @@ userRouter.post('/login', function(req,res,next){
 
 
 userRouter.get('/logout', function(req,res){
-	console.log(req.user)
+	//console.log(req.user)
 	req.logOut();
 	res.clearCookie('connect.sid');
 	res.redirect('/');
-	console.log(req.user)
 });
 
 module.exports = userRouter;
