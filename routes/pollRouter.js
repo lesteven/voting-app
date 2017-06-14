@@ -146,7 +146,7 @@ function addUser(req,poll){
 		else{return false}
 	}
 	else{
-		var ip = req.ip;
+		var ip = req.headers['x-forwarded-for'];
 		var index = poll.voters.indexOf(ip)
 		if(index === -1){
 			poll.voters.push(ip);
