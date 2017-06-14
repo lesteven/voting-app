@@ -40785,7 +40785,7 @@ var Polls = function (_Component) {
 	}, {
 		key: 'close',
 		value: function close() {
-			console.log(this.state.style);
+			//console.log(this.state.style)
 			this.setState({ showTable: false, style: { display: 'none' } });
 		}
 	}, {
