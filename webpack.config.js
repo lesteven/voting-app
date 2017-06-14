@@ -6,8 +6,7 @@ var CompressionPlugin = require("compression-webpack-plugin");
 module.exports = {
   entry: {index:'./src/index.js',
          regLog:'./src/regLog.js',
-          myPolls:'./src/myPolls.js',
-          pollChart: './src/pollChart.js'},
+          myPolls:'./src/myPolls.js'},
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'public')
@@ -52,13 +51,13 @@ new webpack.DefinePlugin({
       },
       exclude: [/\.min\.js$/gi] // skip pre-minified libs
     }),
-    new webpack.NoErrorsPlugin(),
+    new webpack.optimize.AggressiveMergingPlugin(),
     new CompressionPlugin({
       asset: "[path].gz[query]",
       algorithm: "gzip",
       test: /\.js$|\.css$|\.html$/,
       threshold: 10240,
-      minRatio: 0
+      minRatio: 0.8
     })
   ]
 };
