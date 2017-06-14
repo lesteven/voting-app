@@ -41,6 +41,12 @@ var pollRouter = require('./routes/pollRouter');
 
 app.use(methodOverride('_method'))
 
+app.get('*.js', function (req, res, next) {
+  req.url = req.url + '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use('/',express.static(__dirname + '/public'));
 
 app.use('/reglog',express.static(__dirname + '/public/reglog.html'));
