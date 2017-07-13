@@ -14,8 +14,8 @@ module.exports = {
   devServer:{
     publicPath:'/',
     contentBase:'./public',
-  	inline:true,
-  	port:8080,
+    inline:true,
+    port:8080,
     proxy:{
     '**':{
       target:'http://localhost:3000',
@@ -28,9 +28,9 @@ module.exports = {
   module: {
   loaders: [
     { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader", 
-		
+    
     query:{presets:['react','es2015']}
-	}
+  }
   ]
 },
   plugins: [
